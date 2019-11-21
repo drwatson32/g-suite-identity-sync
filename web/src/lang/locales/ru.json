@@ -1,0 +1,65 @@
+{
+    "message": {
+        "menu": {
+            "home": "Старт",
+            "signIn": "Войти",
+            "settings": "Настройки",
+            "about": "О продукте",
+            "signOut": "Выйти"
+        },
+        "pageTitle": "Менеджер аккаунтов",
+        "ldapAccount": "LDAP аккаунт",
+        "username": "Имя пользователя",
+        "name": "Имя",
+        "emails": "Почтовые адреса",
+        "ldapPassword": "Введите пароль для LDAP",
+        "confirmLdapPassword": "Подтвердите пароль для LDAP",
+        "syncGSuitePassword": "Синхронизировать пароль с G Suite",
+        "updateLdapAccount": "Обновить LDAP аккаунт",
+        "createLdapAccount": "Создать LDAP аккаунт",
+        "selectUsername": "Выберите имя пользователя",
+        "role": "Роль",
+        "groups": "Группы",
+        "authProgress": "Аутентификация и авторизация с вашим профилем пользователя",
+        "aboutTitle": "Синхронизация G-Suite в LDAP",
+        "pageNotFound": "Страница не найдена!",
+        "settings": {
+            "title": "Настройки",
+            "general": {
+                "title": "Общие",
+                "externalAccountsGroupLabel": "Группа для внешних пользователей",
+                "saveButton": "Сохранить",
+                "savedTitle": "Общие настройки",
+                "savedText": "Успешно сохранено."
+            },
+            "sync": {
+                "title": "Сихнронизация",
+                "groupsButton": " Группы в LDAP",
+                "usersButton": "Атрибуты пользователя GSuite",
+                "successUsersTitle": "Синхронизация атрибутов пользователя",
+                "successUsersText": "Все атрибуты пользователя GSuite синхронизированы.",
+                "successGroupsTitle": "Синхронизация групп",
+                "successGroupsText": "Все атрибуты групп GSuite синхронизированы"
+            },
+            "push": {
+                "title": "Уведомления",
+                "endpointHostnameEdit": "Адрес или имя сервера для уведомлений",
+                "endpointHostnameLabel": "Google посылает уведомления на сервер",
+                "enableButton": "Включить",
+                "disableButton": "Выключить",
+                "enabledLabel": "Уведомления включены.",
+                "successTitle": "Уведомления",
+                "successText": "Уведомления успешно включены!"
+            }
+        },
+        "install": {
+            "title": "Установить Google Services",
+            "domain": "GSuite домен",
+            "adminAccount": "Аккаунт администратора",
+            "serviceAccountJson": "Ключ сервисного аккаунта (JSON)",
+            "serviceAccountJsonHelp": "Вставьте ключ в JSON сгенерированный с помощью Google Cloud Console",
+            "serviceAccountSetup": "Настройка",
+            "serviceAccountSuccess": "Google services успешно установлены. Вы можете использовать!"
+        }
+    }
+}

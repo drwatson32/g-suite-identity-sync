@@ -63,7 +63,7 @@ public class LdapAccountServiceImpl implements LdapAccountService, Configurable 
 
     @Override
     public String getAccountDN(LdapAccount account) {
-        return config.getUserAttr() + "=" + account.getUsername() + "," + config.getLdapUserBaseDN();
+        return config.getUserAttr() + "=" + account.getAccount() + "," + config.getLdapUserBaseDN();
     }
 
 
@@ -134,9 +134,10 @@ public class LdapAccountServiceImpl implements LdapAccountService, Configurable 
             for (String email : account.getEmails()) {
                 entry.addAttribute("mail", email);
             }
+            entry.addAttribute("displayName", account.getName());
             entry.addAttribute("givenName", account.getGivenName());
             entry.addAttribute("sn", account.getFamilyName());
-            entry.addAttribute("cn", account.getName());
+            entry.addAttribute("cn", account.getUsername());
             entry.addAttribute("employeeNumber", account.getSubject());
             entry.addAttribute("userPassword", account.getPassword());
             entry.addAttribute("employeeType", account.getRole().toString());
@@ -154,9 +155,10 @@ public class LdapAccountServiceImpl implements LdapAccountService, Configurable 
             if (account.getPassword() != null) {
                 mods.add(new Modification(REPLACE, "userPassword", account.getPassword()));
             }
+            mods.add(new Modification(REPLACE, "displayName", account.getName()));
             mods.add(new Modification(REPLACE, "givenName", account.getGivenName()));
             mods.add(new Modification(REPLACE, "sn", account.getFamilyName()));
-            mods.add(new Modification(REPLACE, "cn", account.getName()));
+            mods.add(new Modification(REPLACE, "cn", account.getUsername()));
             mods.add(new Modification(REPLACE, "mail", account.getEmails().toArray(new String[0])));
             conn.modify(new ModifyRequest(getAccountDN(account.getSubject()), mods));
         } catch (LDAPException e) {
@@ -389,13 +391,13 @@ public class LdapAccountServiceImpl implements LdapAccountService, Configurable 
 
     private LdapAccount accountFromEntry(SearchResultEntry entry) {
         LdapAccount account = new LdapAccount(entry.getDN());
-        account.setUsername(entry.getAttributeValue("uid"));
+        account.setUsername(entry.getAttributeValue("cn"));
         String[] emails = entry.getAttributeValues("mail");
         account.setEmails(emails != null ? new HashSet<>(Arrays.asList(emails)) : Collections.emptySet());
+        account.setName(entry.getAttributeValue("displayName"));
         account.setGivenName(entry.getAttributeValue("givenName"));
         account.setFamilyName(entry.getAttributeValue("sn"));
         account.setSubject(entry.getAttributeValue("employeeNumber"));
-        account.setName(entry.getAttributeValue("cn"));
         account.setRole(LdapAccount.Role.valueOf(entry.getAttributeValue("employeeType")));
         return account;
     }

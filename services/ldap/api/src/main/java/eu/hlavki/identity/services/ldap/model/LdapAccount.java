@@ -42,4 +42,8 @@ public class LdapAccount {
                 append(", role=").append(role).append("]");
         return sb.toString();
     }
+
+    public String getAccount() {
+        return name.split("@")[0];
+    }
 }

@@ -59,46 +59,6 @@
                     <archiveZip>false</archiveZip>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.28.0</version>
-                <configuration>
-                    <images>
-                        <image>
-                            <name>hlavki/g-suite-identity-sync:${project.version}</name>
-                            <build>
-                                <dockerFileDir>.</dockerFileDir>
-                                <tags>
-                                    <tag>${docker.release.tag}</tag>
-                                </tags>
-                                <assembly>
-                                    <descriptor>assembly.xml</descriptor>
-                                    <user>karaf:karaf:root</user>
-                                </assembly>
-                            </build>
-                        </image>
-                    </images>
-                    <verbose>true</verbose>
-                    <removeAll>true</removeAll>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>docker:build</id>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>docker:push</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>push</goal>
-                            <goal>remove</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 </project>
