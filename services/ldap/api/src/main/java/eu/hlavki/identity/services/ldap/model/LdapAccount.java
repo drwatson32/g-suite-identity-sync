@@ -44,6 +44,6 @@ public class LdapAccount {
     }
 
     public String getAccount() {
-        return name.split("@")[0];
+        return username.split("@")[0];
     }
 }
