@@ -1,9 +1,12 @@
 package eu.hlavki.identity.services.ldap.model;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Set;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sun.misc.BASE64Encoder;
 
 @Getter
 @Setter
@@ -45,5 +48,15 @@ public class LdapAccount {
 
     public String getAccount() {
         return username.split("@")[0];
+    }
+
+    public String getSHAPassword(){
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA");
+            md.update(password.getBytes());
+            return  "{SHA}" + new BASE64Encoder().encode(md.digest());
+        } catch (NoSuchAlgorithmException e) {
+            return password;
+        }
     }
 }

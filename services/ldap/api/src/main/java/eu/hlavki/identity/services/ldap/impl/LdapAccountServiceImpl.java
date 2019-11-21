@@ -139,7 +139,7 @@ public class LdapAccountServiceImpl implements LdapAccountService, Configurable 
             entry.addAttribute("sn", account.getFamilyName());
             entry.addAttribute("cn", account.getUsername());
             entry.addAttribute("employeeNumber", account.getSubject());
-            entry.addAttribute("userPassword", account.getPassword());
+            entry.addAttribute("userPassword", account.getSHAPassword());
             entry.addAttribute("employeeType", account.getRole().toString());
             conn.add(entry);
         } catch (LDAPException e) {
@@ -153,7 +153,7 @@ public class LdapAccountServiceImpl implements LdapAccountService, Configurable 
         try (LDAPConnection conn = ldapPool.getConnection()) {
             List<Modification> mods = new ArrayList<>();
             if (account.getPassword() != null) {
-                mods.add(new Modification(REPLACE, "userPassword", account.getPassword()));
+                mods.add(new Modification(REPLACE, "userPassword", account.getSHAPassword()));
             }
             mods.add(new Modification(REPLACE, "displayName", account.getName()));
             mods.add(new Modification(REPLACE, "givenName", account.getGivenName()));
