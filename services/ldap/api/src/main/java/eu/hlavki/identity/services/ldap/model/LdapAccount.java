@@ -54,7 +54,7 @@ public class LdapAccount {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA");
             md.update(password.getBytes());
-            return  "{SHA}" + Base64.getEncoder().encode(md.digest());
+            return  "{SHA}" + Base64.getEncoder().encodeToString(md.digest());
         } catch (NoSuchAlgorithmException e) {
             return password;
         }
