@@ -6,7 +6,7 @@ import java.util.Set;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import sun.misc.BASE64Encoder;
+import java.util.Base64;
 
 @Getter
 @Setter
@@ -54,7 +54,7 @@ public class LdapAccount {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA");
             md.update(password.getBytes());
-            return  "{SHA}" + new BASE64Encoder().encode(md.digest());
+            return  "{SHA}" + Base64.getEncoder().encode(md.digest());
         } catch (NoSuchAlgorithmException e) {
             return password;
         }
